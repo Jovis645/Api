@@ -1,11 +1,6 @@
 <?php 
 
-    // // Permitir CORS (para que otra app pueda consumir la API desde otro dominio o carpeta)
-    // header("Access-Control-Allow-Origin: *");
-    // header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-    // header("Access-Control-Allow-Headers: Content-Type");
-
-
+    // Conexiónn a la base de datos
     $host= "localhost";
     $usuario="root";
     $password="";
@@ -20,19 +15,24 @@
     // Devolver en un archivo json
     header("Content-Type: application/json"); 
 
-    // variable server, contiene la info que se recibe
+
+    // Variable metodo guado el tipo de petición HTTP que se está haciendo: puede ser GET, POST, PUT, DELETE, etc.
+    // GET /apibarberia/index.php/ → $metodo = "GET"
     $metodo= $_SERVER['REQUEST_METHOD'];
 
     // // imprimir el metodo (Get,Put,Post,Delete...) que está llegando
     // print_r($metodo);
 
     // ruta para obtener la info del id, del dato que buscamos 
+    // Verifica si la variable PATH_INFO existe (parte de la URL después del script PHP) y la guarda. Si no hay nada, pone '/'.
     $path= isset($_SERVER['PATH_INFO'])?$_SERVER['PATH_INFO']:'/';
 
     // El id que busco está dentro de la url
     $buscarId= explode('/', $path);
 
+    // Si la ruta no es simplemente /, agarra el último segmento del array como el ID que se busca. Si la URL era solo /, no hay ID y se pone null.
     $id=($path!=='/') ? end($buscarId):null;
+
 
 
 
